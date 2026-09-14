@@ -35,3 +35,24 @@ if this panel is hidden.
 
 To compile the code go to `Sketch > verify/compile`, hit `ctrl + r` or click the `✓` in the top left corner inside the IDE.
 To upload the code go to the same Sketch menu and click `Upload`, hit `ctrl + u` or click the `->` next to the `✓` icon.
+
+## Set the permission for the board's port (Linux)
+
+1. Check the owner of `/dev/ttyACM0`. It should be owned by `uucp` (Fedora/Nobara) or `dialout` (Arch/Endeavour):
+
+```bash
+ls -l /dev/ttyACM0
+```
+
+2. Check if the user is part of the group with the command `groups`.
+
+3. If the user isn't part of the corresponding group run:
+
+> Remember to swap \<port_group\> with the corresponding group name.
+
+```bash
+sudo usermod -aG <port_group> $USER
+```
+
+4. If the user was just added to the group, log out and log back in to apply the changes.
+
